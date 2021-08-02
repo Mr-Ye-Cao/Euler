@@ -32,7 +32,7 @@ void solve(int arr[],int N){
         
         // min(st[l][r])=min(st[l][l+p-1],st[l+p][r])
 
-        printf("%d\n",min(st[l][l+p-1],st[l+p][r]));
+        printf("%d\n",min(st[l][l+p-1],st[r-p+1][r]));
     }
 }
    

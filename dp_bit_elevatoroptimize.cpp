@@ -11,7 +11,9 @@ void solve(int arr[],int N,int W){
 
         for(int j=0;j<N;j++){
             if(i&(1<<j)){
+                // extract an option from dp that previously do not contain passenger i
                 pair<int,int> option=dp[i^(1<<j)];
+                
                 if(option.second+arr[j]<=W){
                     option.second+=arr[j];
                 }else{

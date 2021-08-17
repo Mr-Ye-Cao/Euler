@@ -1,44 +1,52 @@
 #include <bits/stdc++.h>
 using namespace std;
+const int INF=1e8;
 
-void solve(int N,vector<int>& nodes, vector<tuple<int,int,int> > edges,int E){
-    // bellman-ford algorithm
-    vector<int> dis(N,100000000);
+void Query(vector<int> dis){
+    while(true){
+        int destination;
+        scanf("%d",&destination);
+        cout<<dis[destination]<<"\n";
+    }
+}
+
+void solve(int N,int M,vector<int> nodes,vector<tuple<int,int,int> > edges){
+    // bellman-ford algorithm O(MN)
+    vector<int> dis(N,INF);
     dis[0]=0;
 
-    for(int i=0;i<nodes.size()-1;i++){
-        for(auto ed:edges){
+    for(int i=0;i<N-1;i++){
+        for(auto e:edges){
             int a,b,w;
-            tie(a,b,w)=ed;
+            tie(a,b,w)=e;
             dis[b]=min(dis[b],dis[a]+w);
         }
     }
 
-//     while(true){
-//         int k;
-//         scanf("%d",&k);
-//         cout<<dis[k]<<"\n";
-//     }
+    Query(dis);
 }
 
 int main(){
-    int N,E;
+    // Dijackstra's algorithm O(N+Mlog(M))
 
-    scanf("%d %d",&N,&E);
+    int N,M;
+    scanf("%d %d",&N,&M);
 
     vector<int> nodes(N);
-    vector<tuple<int,int,int> > edges;
+    vector<tuple<int,int,int> > edges(2*M);
 
     for(int i=0;i<N;i++)
         nodes[i]=i;
 
-    int e=E;
-    while(E--){
+    for(int i=0;i<2*M;i+=2){
         int a,b,w;
         scanf("%d %d %d",&a,&b,&w);
-        edges.push_back(make_tuple(a,b,w));
+        edges[i]=make_tuple(a,b,w);
+        //for undirected graph add both direction
+        edges[i+1]=make_tuple(b,a,w);
     }
-    solve(N,nodes,edges,e);
+
+    solve(N,M,nodes,edges);
 
     return 0;
 }

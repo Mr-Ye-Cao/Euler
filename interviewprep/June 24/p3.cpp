@@ -1,14 +1,14 @@
 class Solution {
 public:
     int confusingNumberII(int n) {
-        set<auto> answer;
+        set<long> answer;
 
-        vector<int> con(5);
-        c[0]=0;
-        c[0]=1;
-        c[0]=6;
-        c[0]=8;
-        c[0]=9;
+        vector<long> con(5);
+        con[0]=0;
+        con[0]=1;
+        con[0]=6;
+        con[0]=8;
+        con[0]=9;
 
         for(auto a:con){
             auto num1=a*100000000L;

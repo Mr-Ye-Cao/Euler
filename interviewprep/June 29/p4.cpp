@@ -17,16 +17,18 @@ public:
         int mx_height = books[cur][1], minLevelHeight = INT_MAX;
         int curShelfWidth = shelfWidth - books[cur][0];
         
-        // if we have only one book we place this book at cur level and return its height
+        // base case: only one book
+        //      place this book at cur level and return its height
         if(cur == 0)
             return mx_height;
         
+        // recursive case:
         for(int i=cur-1; i>=0;i--){
             int curHeight = books[i][1], curWidth = books[i][0];
             
             int op1 = INT_MAX, op2 = INT_MAX;
             
-            // if the next book has width less than left width space(curShelfWidth)
+            // there is enough space for this book on current level(curShelfWidth)
             // we have two options
             // 1) place this book at next level 
             // 2) place this book at current level and books after that in next level

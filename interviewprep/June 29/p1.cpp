@@ -1,15 +1,25 @@
 class Solution {
 public:
-    int calculateTime(string keyboard, string word) {
-        map<char,int> k;
-        for(int i=0;i<keyboard.length();i++){
-            k[keyboard[i]]=i;
+    vector<string> findOcurrences(string text, string first, string second) {
+        vector<string> result;
+
+        vector<string> vs;
+        
+        while(text!=""){
+            string word=text.substr(0,text.find(" "));
+            if(text.find(" ")==string::npos){
+                vs.push_back(text);
+                break;
+            }else{
+                vs.push_back(word);
+                text=text.substr(text.find(" ")+1);
+            }
         }
-        int pp=0;
-        int result=0;
-        for(char c:word){
-            result+=abs(k[c]-pp);
-            pp=k[c];
+
+        for(int i=0;i<vs.size()-2;i++){
+            if(vs[i]==first && vs[i+1]==second){
+                result.push_back(vs[i+2]);
+            }
         }
 
         return result;
